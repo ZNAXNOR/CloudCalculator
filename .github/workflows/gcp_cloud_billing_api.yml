@@ -1,0 +1,26 @@
+name: Deploy CloudCalculator
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Service Account Key
+        env:
+          GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_PRICING_CALCULATOR_SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "$GCP_PRICING_CALCULATOR_SERVICE_ACCOUNT_KEY" > gcp_pricing_calculator_service_account_444104.json
+          export GCP_PRICING_CALCULATOR_CREDENTIALS=$PWD/gcp_pricing_calculator_service_account_444104.json
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build and Deploy
+        run: npm run build && npm run export
