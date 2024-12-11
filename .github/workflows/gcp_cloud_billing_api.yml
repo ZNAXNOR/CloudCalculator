@@ -16,8 +16,8 @@ jobs:
         env:
           GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_PRICING_CALCULATOR_CREDENTIALS }}
         run: |
-          echo "$GCP_PRICING_CALCULATOR_CREDENTIALS" > gcp_pricing_calculator_service_account_444104.json
-          export GOOGLE_APPLICATION_CREDENTIALS=$PWD/gcp_pricing_calculator_service_account_444104.json
+          echo "$GCP_PRICING_CALCULATOR_CREDENTIALS" > gcp_cloudbilling_service_account_websitelocal.json
+          export GOOGLE_APPLICATION_CREDENTIALS=$PWD/gcp_cloudbilling_service_account_websitelocal.json
 
       - name: Install Dependencies
         run: npm install
